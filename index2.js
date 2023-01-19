@@ -64,14 +64,13 @@ function timeout() {
   let divelm = document.createElement("div");
   let h3elem = document.createElement("h3");
   let bttnelm = document.createElement("button");
-  /*if(score.textContent>='50')
+  if(scoregame>=50)
     {
         h3elem.textContent="You Win!" 
     }
     else{
+        h3elem.textContent = "You Lose!";
     }
-    */
-  h3elem.textContent = "You Lose!";
   bttnelm.textContent = "Play Again";
   bttnelm.classList.add("playagain");
   divelm.append(h3elem);
