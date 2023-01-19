@@ -1,0 +1,94 @@
+body {
+    background-image: url('stage2.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+.form
+{
+    width: 386px;
+    height: 227px;
+    border: 2px solid black;
+    border-radius: 20px;
+    text-align: center;
+    background-color: #dcdcdc7a;
+    color: black;
+    margin:  112px auto auto;
+    
+}
+.points
+{
+    width: 386px;
+    height: 268px;
+    border: 2px solid black;
+    border-radius: 20px;
+    text-align: center;
+    background-color: #dcdcdc7a;
+    color: black;
+    margin: auto;
+
+}
+input
+{
+    border-radius: 8px;  
+    height: 23px;
+    width: 176px;
+    margin-bottom: -4px;
+}
+
+button
+{
+    border-radius: 8px;
+    color: green;
+    margin-top: 12px; 
+    width: 65px;
+    height: 28px;
+ font-weight: bold; 
+    font-size: large;
+}
+
+.points1
+{
+    color: blue;
+    margin: 5px 4px;
+    font-size: xx-large;
+}
+img
+{
+    width: 50px;
+    height: 50px;
+
+}
+.points2
+{
+    color: yellow;
+    margin: 5px 4px;
+    font-size: xx-large;
+}
+.points3
+{
+    color: red;
+    margin: 5px 4px;
+    font-size: xx-large;
+}
+.display {
+    display: none;
+}
+
+h4 {
+    display: inline-block;
+}
+
+#header {
+    margin: 9px 0px;
+    padding-top: 15px;
+    position: relative;
+}
+
+select {
+    width: 150px;
+}
+
+h2 {
+    margin: 20px 9px;
+}

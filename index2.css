@@ -1,0 +1,79 @@
+body {
+    background-image: url('stage.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size:cover;
+  }
+.content
+{
+    text-align: center;
+    color: black;
+    border: 1px solid black;
+    width: 450px;
+    height: 200px;
+    margin: auto;
+    margin-top: 140px; 
+    background-color: white;
+    border-radius: 30px;
+    font-weight: bold;
+    padding: 25px 23px
+}
+h2{
+    display: inline-block;
+    border: 1px solid black;
+    margin: 10px;
+    color: white;
+    background-color:darkgray;
+    border-radius: 6px;
+    width: 230px;
+    height: 35px;
+    text-align: center;
+    padding-top: 6px;
+    position: relative;
+}
+
+.startgame,.playagain
+{
+    color: white;
+    border: 1px solid black;
+    border-radius: 6px;
+    background-color: green;
+    width: 141px;
+    height: 41px;
+    font-weight: bold;
+    font-size: large;
+}
+
+.welcome {
+  left: 16vh;
+}
+.score {
+  left: 22vh;
+}
+
+.time {
+  left: 28vh;
+}
+
+.birdskilled {
+  left: 34vh;
+}
+.display
+{
+    display: none;
+}
+.img {
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    visibility: visible;
+  }
+
+  .bomb{
+    position: absolute;
+    height: 150px;
+    width: 150px;
+    visibility: visible;
+    src: url("bomb.png");
+  }
+
