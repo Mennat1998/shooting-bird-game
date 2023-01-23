@@ -2,6 +2,8 @@
 # Shooting Birds game
 **This is an ITI project using html,css and javascript**  
 ### How to play?
+ - In the login page sign in first with your user name
+ ![image](https://user-images.githubusercontent.com/120107283/214149140-675a382b-f555-43a1-8156-901d269dd8bd.png)
 
 -  In the game when you click on bomb image the surronding birds will be killed and the score is updated.
 -  if the score is greater than 50 when the time finished you will won,else you will lose.
