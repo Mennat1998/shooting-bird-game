@@ -16,13 +16,19 @@ window.addEventListener("load", function () {
   let startgame = document.querySelector(".startgame");
   let content = document.querySelector(".content");
   let timescore = document.querySelector(".time span");
+  let welcome = document.querySelectorAll(".content p")[1];
+  //user saved data
+  let userdata = document.createElement("p");
+  userdata.textContent =
+    "Your last visit :" +
+    `${localStorage.getItem("dateandtime")}` +
+    ", Your last score :" +
+    `${localStorage.getItem("userscore")}`;
+  welcome.append(userdata);
 
   startgame.addEventListener("click", function () {
     content.remove();
     createbomb();
-    //fallbomb(bombimg,0);
-    // ImageGenerator();
-    //  image(number);
     image();
     //timer
     let counter,
@@ -37,7 +43,7 @@ window.addEventListener("load", function () {
         timescore.textContent = ms;
         timeout();
       }
-    }, 300);
+    }, 1000);
   });
 });
 
@@ -56,24 +62,29 @@ const fallbomb = (bombimg, top) => {
     }
     if (endgame) {
       clearInterval(timerId);
-      document.body.removeChild(bombimg);
+      if (document.body.contains(bombimg)) {
+        document.body.removeChild(bombimg);
+      }
     }
   }, 80);
 };
+// time ended
 function timeout() {
   let divelm = document.createElement("div");
-  let h3elem = document.createElement("h3");
+  let h2elem = document.createElement("h2");
   let bttnelm = document.createElement("button");
-  if(scoregame>=50)
-    {
-        h3elem.textContent="You Win!" 
-    }
-    else{
-        h3elem.textContent = "You Lose!";
-    }
+  let yourscore = document.createElement("h3");
+  if (scoregame >= 50) {
+    h2elem.textContent = "You Win!";
+    yourscore.textContent = "Your score  is " + scoregame;
+  } else {
+    h2elem.textContent = "You Lose!";
+    yourscore.textContent = "Your score  is " + scoregame;
+  }
   bttnelm.textContent = "Play Again";
   bttnelm.classList.add("playagain");
-  divelm.append(h3elem);
+  divelm.append(h2elem);
+  divelm.append(yourscore);
   divelm.append(bttnelm);
   divelm.classList.add("content");
   document.body.append(divelm);
@@ -82,43 +93,7 @@ function timeout() {
     window.location.href = "http://127.0.0.1:5500/index.html";
   });
 }
-
-function ImageGenerator() {
-  let arrayofbirds = ["black.gif", "blue.gif", "white.gif"];
-  // var number = Math.floor(Math.random()*arrayofbirds.length);
-  for (let i = 0; i < arrayofbirds.length; i++) {
-    let img = document.createElement("img");
-    //img.setAttribute("scr", arrayofbirds[number]);
-    img.setAttribute("src", arrayofbirds[i]);
-    img.classList.add("img");
-    document.body.append(img);
-    fallrandom(img, 0);
-  }
-}
-
-/*function score()
-{
-for(let index=0 ;i<birds.length;index++ )
-{
-   switch(arraybirds[i])
-   {
-    case "white.gif":
-        scoregame+=5;
-        score.textContent=scoregame;
-
-    break;
-    case "black.gif":
-        scoregame+=10;
-        score.textContent=scoregame;
-    break;
-    case "blue.gif" :
-        scoregame-=10;
-        score.textContent=scoregame;
-    break;     
-   }
-}
-}*/
-
+//creation of birds
 function image() {
   let timerId = setInterval(() => {
     let number = Math.floor(Math.random() * birdsarray.length);
@@ -132,6 +107,7 @@ function image() {
     }
   }, 1500);
 }
+// moving birds
 const fallrandom = (img, left) => {
   let rand = Math.random() * (window.innerHeight - img.height);
   let timerId = setInterval(() => {
@@ -143,102 +119,83 @@ const fallrandom = (img, left) => {
     } else {
       img.remove();
       clearInterval(timerId);
-      //fallrandom(img,0);
     }
   }, 50);
 };
+//creation of bomb
 function createbomb() {
   let bombimg = document.createElement("img");
   bombimg.setAttribute("src", "bomb.png");
   bombimg.classList.add("bomb");
   document.body.append(bombimg);
   fallbomb(bombimg, 0);
-
+  //click on bomb to change image
   bombimg.addEventListener("click", function (e) {
     bombimg.setAttribute("src", "explosedbomb.gif");
     setTimeout(() => {
-      document.body.removeChild(bombimg);
+      if (document.body.contains(bombimg)) {
+        document.body.removeChild(bombimg);
+      }
       createbomb();
     }, 500);
   });
+  //click on bomb to kill birds
   bombimg.addEventListener("click", function (e) {
-    //  console.log(e.x+bombimg.width);
-    //console.log(e.y+bombimg.height);
-    //console.log(document.elementFromPoint(e.x, e.y));
-
-    /*for(let top=0 , left=0 ; top<bombimg.offsetTop && left<bombimg.offsetLeft;top++,left++)
-        {
-            console.log("hey");
-        var imgs = this.parentNode.querySelectorAll(".img");
-       // let test=document.elementFromPoint(top, left);
-
-        //console.log(document.elementFromPoint(top, left));
-       // console.log(imgs);
-        }
-*/
     var list = document.getElementsByClassName("img");
     var rect = bombimg.getBoundingClientRect();
-    console.log(rect.top, rect.right, rect.bottom, rect.left);
     let arraybirds = [];
-
     for (var i = 0; i < list.length; i++) {
       arraybirds.push({ top: list[i].offsetTop, left: list[i].offsetLeft });
     }
     for (let i = 0; i < arraybirds.length; i++) {
       let score = document.querySelector(".score span");
       let birdskilled = document.querySelector(".birdskilled span");
-      console.log(
-        Math.abs(arraybirds[i].top - rect.top),
-        Math.abs(arraybirds[i].top - rect.top) < 150
-      );
-      console.log(
-        Math.abs(arraybirds[i].left - rect.left),
-        Math.abs(arraybirds[i].left - rect.left) < 150
-      );
+
       if (
         Math.abs(arraybirds[i].left - rect.left) < 200 &&
         Math.abs(arraybirds[i].top - rect.top) < 200
       ) {
-        console.log("hey");
-
-        //  if(list[i].currentSrc="http://127.0.0.1:5500/white.gif")
-        // s=s+5;
-        let birdtypes = list[i].getAttribute("src");
-        // let deadbird =document.querySelectorAll("img");
-        switch (birdtypes) {
-          case "white.gif":
-            scoregame += 5;
-            score.textContent = scoregame;
-            killedbirds++;
-            birdskilled.textContent = killedbirds;
-            document.body.removeChild(list[i]);
-            break;
-          case "black.gif":
-            scoregame += 10;
-            score.textContent = scoregame;
-            killedbirds++;
-            birdskilled.textContent = killedbirds;
-            document.body.removeChild(list[i]);
-
-            break;
-          case "blue.gif":
-            scoregame -= 10;
-            score.textContent = scoregame;
-            killedbirds++;
-            birdskilled.textContent = killedbirds;
-            document.body.removeChild(list[i]);
-
-            break;
+        if (list[i] != undefined) {
+          let birdtypes = list[i].getAttribute("src");
+          console.log("list", list[i]);
+          list[i].style.visibility = "hidden";
+          document.body.removeChild(list[i]);
+          switch (birdtypes) {
+            case "white.gif":
+              //   list[i].remove();
+              scoregame += 5;
+              score.textContent = scoregame;
+              killedbirds++;
+              birdskilled.textContent = killedbirds;
+              break;
+            case "black.gif":
+              //   list[i].remove();
+              scoregame += 10;
+              score.textContent = scoregame;
+              killedbirds++;
+              birdskilled.textContent = killedbirds;
+              break;
+            case "blue.gif":
+              //  list[i].remove();
+              scoregame -= 10;
+              score.textContent = scoregame;
+              killedbirds++;
+              birdskilled.textContent = killedbirds;
+              break;
+          }
+          localStorage.setItem("userscore", score.textContent);
+          localStorage.setItem("dateandtime", getEventDate());
         }
       }
     }
-    //console.log(s);
   });
 }
 
-/*
-localStorage.setItem(userName, JSON.stringify({
-    name: userName,
-    score: currentScore
-}));
-*/
+// function to get date and time
+function getEventDate() {
+  let d = new Date();
+  return (
+    `Date: ${d.getFullYear()}-${d.getMonth()}-${d.getDate()} ` +
+    ` Time:${d.getHours()}:${d.getMinutes()}`
+  );
+}
