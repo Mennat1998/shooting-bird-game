@@ -1,6 +1,6 @@
 
 # Shooting Birds game
-**This is an ITI project for using html,css and javascript**  
+**This is an ITI project using html,css and javascript**  
 ### How to play?
 
 -  In the game when you click on bomb image the surronding birds will be killed and the score is updated.
